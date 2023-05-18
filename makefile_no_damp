@@ -1,0 +1,19 @@
+CC = g++
+
+main_no_damp: bend_kick_c_oct_no_damp.o read_parameters_082022.o ca_rand.o array2d.o dSFMT.o
+	$(CC) -o main_no_damp.exe bend_kick_c_oct_no_damp.o read_parameters_082022.o ca_rand.o array2d.o dSFMT.o -L/global/homes/j/jzaris/lib/ -lfmm3d -lgomp
+
+bend_kick_c_oct_no_damp.o: bend_kick_c_oct_no_damp.c bend_kick_c_with_doppler.h FMM3D/c/lfmm3d_c.h FMM3D/c/utils.h read_parameters_with_doppler.h ca_rand.h array2d.h dSFMT/dSFMT.h
+	$(CC) -c bend_kick_c_oct_no_damp.c
+
+read_parameters_082022.o: read_parameters_082022.c read_parameters_with_doppler.h ca_rand.h array2d.h dSFMT/dSFMT.h
+	$(CC) -c read_parameters_082022.c
+
+ca_rand.o: ca_rand.c ca_rand.h dSFMT/dSFMT.h
+	$(CC) -c ca_rand.c
+
+array2d.o: array2d.c array2d.h
+	$(CC) -c array2d.c
+
+dSFMT.o: dSFMT/dSFMT.c dSFMT/dSFMT.h
+	$(CC) -c dSFMT/dSFMT.c
